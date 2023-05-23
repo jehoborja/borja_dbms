@@ -1,0 +1,57 @@
+DROP DATABASE student_information;
+CREATE DATABASE student_information;
+
+use student_information;
+
+CREATE TABLE student(
+    student_no int PRIMARY KEY AUTO_INCREMENT,
+    student_fname varchar(50),
+    student_lname varchar(50),
+    major varchar(50),
+    gender ENUM ('M','F') DEFAULT ('M'),
+    home_address varchar(50)
+);
+
+CREATE TABLE grade(
+    student_no int,
+    sub_code int PRIMARY KEY AUTO_INCREMENT,
+    grade double,
+    CONSTRAINT FKstudent_info FOREIGN KEY (student_no) REFERENCES student(student_no)
+);
+
+CREATE TABLE subject(
+    sub_code int,
+    sub_descr varchar(50),
+    CONSTRAINT FKgrade FOREIGN KEY (sub_code) REFERENCES grade(sub_code)
+);
+
+DROP DATABASE nashua_fine_arts_gallery;
+CREATE DATABASE nashua_fine_arts_gallery;
+
+use nashua_fine_arts_gallery;
+
+CREATE TABLE art_customer(
+    customer_number int,
+    customer_name varchar(50),
+    customer_gender ENUM ('Male','Female') DEFAULT ('Male'),
+    address varchar(50),
+    artist_ID int PRIMARY KEY AUTO_INCREMENT,
+    price int(11)
+);
+
+CREATE TABLE art_artist(
+    artist_name varchar(50),
+    art_title varchar(50),
+    art_price int(11),
+    art_description int PRIMARY KEY AUTO_INCREMENT,
+    
+    FOREIGN KEY (art_description) REFERENCES art_customer(artist_ID)
+);
+
+1. SELECT * FROM art_customer WHERE customer_number AND customer_name;
+2. SELECT * FROM art_artist WHERE artist_name AND art_description;
+3. SELECT * FROM art_customer WHERE price * .12;
+4. SELECT * FROM art_artist;
+5. SELECT * FROM art_artist WHERE art_price AND art_title;
+6. True
+7. SELECT * FROM art_customer WHERE customer_number AND artist_ID;
